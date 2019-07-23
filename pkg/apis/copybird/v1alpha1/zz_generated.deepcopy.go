@@ -97,8 +97,20 @@ func (in *CopybirdSpec) DeepCopyInto(out *CopybirdSpec) {
 	*out = *in
 	in.Input.DeepCopyInto(&out.Input)
 	in.Compress.DeepCopyInto(&out.Compress)
-	in.Output.DeepCopyInto(&out.Output)
-	in.Notifier.DeepCopyInto(&out.Notifier)
+	if in.Output != nil {
+		in, out := &in.Output, &out.Output
+		*out = make([]CopybirdOption, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Notifier != nil {
+		in, out := &in.Notifier, &out.Notifier
+		*out = make([]CopybirdOption, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	return
 }
 

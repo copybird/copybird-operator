@@ -10,15 +10,16 @@ import (
 // CopybirdSpec defines the desired state of Copybird
 // +k8s:openapi-gen=true
 type CopybirdSpec struct {
-	Name     string         `json:"name"`
-	Type     string         `json:"type"`
-	Cron     string         `json:"cron"`
-	Input    CopybirdOption `json:"input"`
-	Compress CopybirdOption `json:"compress"`
-	Output   CopybirdOption `json:"output"`
-	Notifier CopybirdOption `json:"notifier"`
+	Name     string           `json:"name"`
+	Type     string           `json:"type"`
+	Cron     string           `json:"cron"`
+	Input    CopybirdOption   `json:"input"`
+	Compress CopybirdOption   `json:"compress"`
+	Output   []CopybirdOption `json:"output"`
+	Notifier []CopybirdOption `json:"notifier"`
 }
 
+//CopybirdOption describes general way to setup options for input, compress, output and notifier
 type CopybirdOption struct {
 	Type   string            `json:"type"`
 	Config map[string]string `json:"config"`

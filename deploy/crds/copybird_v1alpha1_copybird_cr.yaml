@@ -3,5 +3,20 @@ kind: Copybird
 metadata:
   name: example-copybird
 spec:
-  # Add fields here
-  size: 3
+  name: sample-backup
+  type: "backup"
+  cron: "*/1 * * * *"
+  input:
+    type: mysql
+    config:
+      dsn: root:root@tcp(localhost:3306)/test
+  compress:
+    type: gzip
+    config:
+      level: 2
+  output:
+    - type: local
+      config:
+        file: dump.sql.gz
+  notifier:
+    - type: stdout
