@@ -10,9 +10,18 @@ import (
 // CopybirdSpec defines the desired state of Copybird
 // +k8s:openapi-gen=true
 type CopybirdSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
-	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
+	Name     string         `json:"name"`
+	Type     string         `json:"type"`
+	Cron     string         `json:"cron"`
+	Input    CopybirdOption `json:"input"`
+	Compress CopybirdOption `json:"compress"`
+	Output   CopybirdOption `json:"output"`
+	Notifier CopybirdOption `json:"notifier"`
+}
+
+type CopybirdOption struct {
+	Type   string            `json:"type"`
+	Config map[string]string `json:"config"`
 }
 
 // CopybirdStatus defines the observed state of Copybird
