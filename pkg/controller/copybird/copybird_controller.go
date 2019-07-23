@@ -3,7 +3,7 @@ package copybird
 import (
 	"context"
 
-	appv1alpha1 "github.com/copybird/copybird-operator/pkg/apis/app/v1alpha1"
+	v1alpha1 "github.com/copybird/copybird-operator/pkg/apis/copybird/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -46,7 +46,7 @@ func add(mgr manager.Manager, r reconcile.Reconciler) error {
 	}
 
 	// Watch for changes to primary resource Copybird
-	err = c.Watch(&source.Kind{Type: &appv1alpha1.Copybird{}}, &handler.EnqueueRequestForObject{})
+	err = c.Watch(&source.Kind{Type: &v1alpha1.Copybird{}}, &handler.EnqueueRequestForObject{})
 	if err != nil {
 		return err
 	}
@@ -55,7 +55,7 @@ func add(mgr manager.Manager, r reconcile.Reconciler) error {
 	// Watch for changes to secondary resource Pods and requeue the owner Copybird
 	err = c.Watch(&source.Kind{Type: &corev1.Pod{}}, &handler.EnqueueRequestForOwner{
 		IsController: true,
-		OwnerType:    &appv1alpha1.Copybird{},
+		OwnerType:    &v1alpha1.Copybird{},
 	})
 	if err != nil {
 		return err
@@ -87,7 +87,7 @@ func (r *ReconcileCopybird) Reconcile(request reconcile.Request) (reconcile.Resu
 	reqLogger.Info("Reconciling Copybird")
 
 	// Fetch the Copybird instance
-	instance := &appv1alpha1.Copybird{}
+	instance := &v1alpha1.Copybird{}
 	err := r.client.Get(context.TODO(), request.NamespacedName, instance)
 	if err != nil {
 		if errors.IsNotFound(err) {
@@ -130,7 +130,7 @@ func (r *ReconcileCopybird) Reconcile(request reconcile.Request) (reconcile.Resu
 }
 
 // newPodForCR returns a busybox pod with the same name/namespace as the cr
-func newPodForCR(cr *appv1alpha1.Copybird) *corev1.Pod {
+func newPodForCR(cr *v1alpha1.Copybird) *corev1.Pod {
 	labels := map[string]string{
 		"app": cr.Name,
 	}
@@ -143,9 +143,8 @@ func newPodForCR(cr *appv1alpha1.Copybird) *corev1.Pod {
 		Spec: corev1.PodSpec{
 			Containers: []corev1.Container{
 				{
-					Name:    "busybox",
-					Image:   "busybox",
-					Command: []string{"sleep", "3600"},
+					Name:  "helloCopybird",
+					Image: "hello-world",
 				},
 			},
 		},
