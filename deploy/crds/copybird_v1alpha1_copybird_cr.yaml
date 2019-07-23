@@ -13,7 +13,7 @@ spec:
   compress:
     type: gzip
     config:
-      level: 2
+      level: "2"
   output:
     - type: local
       config:

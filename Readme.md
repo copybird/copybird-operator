@@ -55,3 +55,8 @@ And then deploy Copybird CR with:
 ```
 kubectl create -f deploy/crds/copybird_v1alpha1_copybird_cr.yaml
 ```
+
+## Run operator locally 
+```
+operator-sdk up local --namespace=default
+```
