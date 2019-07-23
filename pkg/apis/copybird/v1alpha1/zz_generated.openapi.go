@@ -11,13 +11,13 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"github.com/copybird/copybird-operator/pkg/apis/app/v1alpha1.Copybird":       schema_pkg_apis_app_v1alpha1_Copybird(ref),
-		"github.com/copybird/copybird-operator/pkg/apis/app/v1alpha1.CopybirdSpec":   schema_pkg_apis_app_v1alpha1_CopybirdSpec(ref),
-		"github.com/copybird/copybird-operator/pkg/apis/app/v1alpha1.CopybirdStatus": schema_pkg_apis_app_v1alpha1_CopybirdStatus(ref),
+		"github.com/copybird/copybird-operator/pkg/apis/copybird/v1alpha1.Copybird":       schema_pkg_apis_copybird_v1alpha1_Copybird(ref),
+		"github.com/copybird/copybird-operator/pkg/apis/copybird/v1alpha1.CopybirdSpec":   schema_pkg_apis_copybird_v1alpha1_CopybirdSpec(ref),
+		"github.com/copybird/copybird-operator/pkg/apis/copybird/v1alpha1.CopybirdStatus": schema_pkg_apis_copybird_v1alpha1_CopybirdStatus(ref),
 	}
 }
 
-func schema_pkg_apis_app_v1alpha1_Copybird(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_copybird_v1alpha1_Copybird(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -44,23 +44,23 @@ func schema_pkg_apis_app_v1alpha1_Copybird(ref common.ReferenceCallback) common.
 					},
 					"spec": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/copybird/copybird-operator/pkg/apis/app/v1alpha1.CopybirdSpec"),
+							Ref: ref("github.com/copybird/copybird-operator/pkg/apis/copybird/v1alpha1.CopybirdSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/copybird/copybird-operator/pkg/apis/app/v1alpha1.CopybirdStatus"),
+							Ref: ref("github.com/copybird/copybird-operator/pkg/apis/copybird/v1alpha1.CopybirdStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/copybird/copybird-operator/pkg/apis/app/v1alpha1.CopybirdSpec", "github.com/copybird/copybird-operator/pkg/apis/app/v1alpha1.CopybirdStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/copybird/copybird-operator/pkg/apis/copybird/v1alpha1.CopybirdSpec", "github.com/copybird/copybird-operator/pkg/apis/copybird/v1alpha1.CopybirdStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
-func schema_pkg_apis_app_v1alpha1_CopybirdSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_copybird_v1alpha1_CopybirdSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -72,7 +72,7 @@ func schema_pkg_apis_app_v1alpha1_CopybirdSpec(ref common.ReferenceCallback) com
 	}
 }
 
-func schema_pkg_apis_app_v1alpha1_CopybirdStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_pkg_apis_copybird_v1alpha1_CopybirdStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{

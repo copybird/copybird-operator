@@ -1,9 +1,9 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  name: copybirds.app.example.com
+  name: copybirds.copybird.example.com
 spec:
-  group: app.example.com
+  group: copybird.example.com
   names:
     kind: Copybird
     listKind: CopybirdList

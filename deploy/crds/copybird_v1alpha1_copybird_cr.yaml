@@ -1,4 +1,4 @@
-apiVersion: app.example.com/v1alpha1
+apiVersion: copybird.example.com/v1alpha1
 kind: Copybird
 metadata:
   name: example-copybird
