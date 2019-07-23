@@ -1,0 +1,7 @@
+apiVersion: app.example.com/v1alpha1
+kind: Copybird
+metadata:
+  name: example-copybird
+spec:
+  # Add fields here
+  size: 3
