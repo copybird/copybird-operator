@@ -143,8 +143,9 @@ func newPodForCR(cr *v1alpha1.Copybird) *corev1.Pod {
 		Spec: corev1.PodSpec{
 			Containers: []corev1.Container{
 				{
-					Name:  "helloCopybird",
-					Image: "hello-world",
+					Name:    "busybox",
+					Image:   "busybox",
+					Command: []string{"sleep", "3600"},
 				},
 			},
 		},
