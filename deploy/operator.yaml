@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: copybird-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: copybird-operator
+  template:
+    metadata:
+      labels:
+        name: copybird-operator
+    spec:
+      serviceAccountName: copybird-operator
+      containers:
+        - name: copybird-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - copybird-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "copybird-operator"

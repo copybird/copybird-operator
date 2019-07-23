@@ -1,0 +1,1 @@
+# K8s operator for Copybird CRD
