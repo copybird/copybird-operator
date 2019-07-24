@@ -1,6 +1,14 @@
 # K8s operator for Copybird CRD
 
-Simple operator for Copybird CRD 
+Simple operator to manage Copybird CRD. Looks for Copybird CRD, creates, updates and removes CronJob resources within cluster based on CRD configurations. 
+
+## Install locally with minikube
+
+1. Setup a simple k8s cluster with `minikube`. Make usre `kubectl` command is working
+2. Install operator-framework (see instructions below)
+3. Follow instruction from `Build & Deploy` section below) to setup cluster resources
+4. Run operator locally with `operator-sdk up local --namespace=default` 
+
 
 ## Local Development
 Install operator-framework first: 
