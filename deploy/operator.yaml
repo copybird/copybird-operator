@@ -15,7 +15,7 @@ spec:
       serviceAccountName: copybird-operator
       containers:
         - name: copybird-operator
-          image: anatoliyfedorenko/copybird-operator:test
+          image: copybird/operator:test
           command:
           - copybird-operator
           imagePullPolicy: Always
