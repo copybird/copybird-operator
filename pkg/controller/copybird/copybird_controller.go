@@ -154,6 +154,7 @@ func newCronJobForCR(cr *v1alpha1.Copybird) *v1beta1.CronJob {
 									Args:    []string{},
 								},
 							},
+							RestartPolicy: "OnFailure",
 						},
 					},
 				},
