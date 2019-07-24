@@ -4,7 +4,9 @@ import (
 	"context"
 
 	v1alpha1 "github.com/copybird/copybird-operator/pkg/apis/copybird/v1alpha1"
+	batchv1 "k8s.io/api/batch/v1"
 	v1beta1 "k8s.io/api/batch/v1beta1"
+	"k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -135,6 +137,27 @@ func newCronJobForCR(cr *v1alpha1.Copybird) *v1beta1.CronJob {
 		},
 		Spec: v1beta1.CronJobSpec{
 			Schedule: cr.Spec.Cron,
+			JobTemplate: v1beta1.JobTemplateSpec{
+				Spec: batchv1.JobSpec{
+					Template: v1.PodTemplateSpec{
+						ObjectMeta: metav1.ObjectMeta{
+							Name:      cr.Name + "-copybird",
+							Namespace: cr.Namespace,
+							Labels:    labels,
+						},
+						Spec: v1.PodSpec{
+							Containers: []v1.Container{
+								{
+									Name:    cr.Name,
+									Image:   "copybird/copybird",
+									Command: []string{},
+									Args:    []string{},
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 	}
 }
