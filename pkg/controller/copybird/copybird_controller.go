@@ -103,7 +103,7 @@ func (r *ReconcileCopybird) Reconcile(request reconcile.Request) (reconcile.Resu
 		return reconcile.Result{}, err
 	}
 
-	// Check if this Pod already exists
+	// Check if this CronJob already exists
 	found := &v1beta1.CronJob{}
 	err = r.client.Get(context.TODO(), types.NamespacedName{Name: cronJob.Name, Namespace: cronJob.Namespace}, found)
 	if err != nil && errors.IsNotFound(err) {
@@ -117,6 +117,17 @@ func (r *ReconcileCopybird) Reconcile(request reconcile.Request) (reconcile.Resu
 		return reconcile.Result{}, nil
 	} else if err != nil {
 		return reconcile.Result{}, err
+	}
+
+	if found.Spec.Schedule != instance.Spec.Cron {
+		found.Spec.Schedule = instance.Spec.Cron
+		err = r.client.Update(context.TODO(), found)
+		if err != nil {
+			reqLogger.Error(err, "Failed to update CronJob.", "CronJob.Namespace", found.Namespace, "Deployment.Name", found.Name)
+			return reconcile.Result{}, err
+		}
+		// Spec updated - return and requeue
+		return reconcile.Result{Requeue: true}, nil
 	}
 
 	// CronJob already exists - don't requeue
